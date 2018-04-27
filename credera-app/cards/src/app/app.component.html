@@ -1,0 +1,81 @@
+<div class="container-fluid h-100">
+  <div class="d-table w-100 h-100">
+    <div class="d-table-cell w-100 align-middle">
+      <div class="row">
+        <div class="col-md-4 mx-auto mt-4" *ngFor="let card of cards">
+
+          <!-- CREDERA CARD STARTS-->
+          <div class="card credera-card border-0 mx-auto">
+            <img class="card-img-top" src="../assets/image-placeholder.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-date"> {{card.date}}</h5>
+              <div class="card-title">
+                {{card.title}}
+              </div>
+              <p class="card-text">{{card.intro}}</p>
+              <a class="article-link" href="javascript:void(0)"> READ FULL ARTICLE </a>
+            </div>
+          </div>
+
+          <!-- CREDERA CARD ENDS-->
+        </div>
+      </div>
+
+      <!-- I'M BORED-->
+
+      <div class="row mt-5" *ngIf="!decision">
+        <div class="col text-center">
+          <a class="article-link mx-auto mt-5" href="javascript:void(0)" *ngIf="decision == null" (click)="decision = 'showOptions'">
+          I'm bored </a>
+        </div>
+      </div>
+
+
+      <div class="card col-md-6 mx-auto m-4 p-4" *ngIf="decision == 'showOptions'">
+        <div class="card-body text-center">
+          <h4 class="card-title"> Would you like to add more cards? </h4>
+          <button class="btn btn-info rounded-0" (click)="decision = true"> YES </button>
+          <button class="btn btn-secondary rounded-0" (click)="decision = false"> NO </button>
+        </div>
+      </div>
+
+      <div class="card col-md-6 m-4 p-4 mx-auto" *ngIf="decision == false">
+        <a class="back-link pb-2" (click)="decision = 'showOptions'" href="javascript:void(0)"> Okay I'm sorry.. </a>
+        <img class="w-100 h-100 mx-auto sorry-img" src="https://media.npr.org/assets/img/2016/03/29/ap_090911089838_sq-3271237f28995f6530d9634ff27228cae88e3440-s900-c85.jpg"
+          alt="">
+      </div>
+
+      <div class="card col-md-6 m-4 p-4 mx-auto" *ngIf="decision == true">
+        <a class="back-link" (click)="decision = 'showOptions'" href="javascript:void(0)"> back </a>
+        <form [formGroup]="addACardForm">
+          <h4 class="mt-2 text-center"> {{ (cards.length > 1)? 'Add Another Card' : 'Add A Card' }}</h4>
+          <input class="form-control p-2 m-2" formControlName="date" type="date" placeholder="Date" [(ngModel)]="card.date" maxlength="30">
+          <small *ngIf="addACardForm.hasError('required', 'date')  && addACardForm.get('date').touched" class=" pl-2 text-danger">
+            Date is required </small>
+          <input class="form-control p-2 m-2" type="text" placeholder="Title" formControlName="title" [(ngModel)]="card.title" maxlength="44">
+          <small *ngIf="addACardForm.hasError('required', 'title')  && addACardForm.get('title').touched" class=" pl-2 text-danger">
+            Title is required </small>
+          <input class="form-control p-2 m-2" type="text" formControlName="intro" placeholder="Small Description" [(ngModel)]="card.intro"
+            maxlength="100">
+          <small class="text-secondary pl-2" [ngClass]="{'text-danger': card.intro.length > 80, 'text-success': card.intro.length > 20 && card.intro.length < 80}">
+            {{card.intro.length}}/100 </small>
+          <small *ngIf="addACardForm.hasError('required', 'intro')  && addACardForm.get('intro').touched" class=" pl-2 text-danger">
+            Description is required </small>
+
+          <small class="text-danger pl-2" *ngIf="card.intro.length == 100"> That's enough..</small>
+
+          <div class="col-md-12 text-center">
+            <button class="btn btn-info col-md-6 mx-auto rounded-0" [disabled]="!addACardForm.valid" (click)="createCard(card)"> Creat! </button>
+          </div>
+
+        </form>
+      </div>
+
+
+      <!-- I'M BORED ENDS -->
+    </div>
+
+  </div>
+
+
+</div>

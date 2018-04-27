@@ -1,0 +1,66 @@
+/* CREDERA CARD */
+
+.credera-card {
+  width: 340px;
+  height: 490px;
+  background-color: #ffffff;
+
+  .card-img-top {
+    height: 200px;
+    border-bottom: 5px solid #dd7537;
+  }
+
+  .card-body {
+    border: 1px solid #cdcccb;
+    border-top: none;
+    padding: 25px 40px;
+
+    .card-date {
+      color: rgb(177, 177, 177);
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .card-title {
+      font-size: 21px;
+      line-height: 25px;
+      color: rgb(77, 77, 78);
+    }
+
+    .card-text {
+      font-family: "Merriweather";
+      font-size: 15px;
+      line-height: 24px;
+      color: rgb(114, 114, 114);
+      margin: 20px 0px 30px 0px;
+    }
+
+    .article-link {
+      color: rgb(221, 117, 55);
+      -webkit-transition: color 0.5s ease-in;
+      -moz-transition: color 0.5s ease-in;
+      -o-transition: color 0.5s ease-in;
+      -ms-transition: color 0.5s ease-in;
+      transition: color 0.5s ease-in;
+
+      &:hover {
+        color: aqua;
+      }
+
+      &:after {
+        content: "\00bb";
+      }
+    }
+  }
+}
+
+
+/* EXTRAS */
+
+.back-link:before {
+  content: "\00ab";
+}
+
+.sorry-img {
+    max-width: 400px;
+}
